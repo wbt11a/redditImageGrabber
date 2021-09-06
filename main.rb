@@ -4,7 +4,7 @@ require 'down'
 require 'fileutils'
 
 SUBREDDIT="EarthPorn"
-DATADIR='C:/Projects/downloads'
+DATADIR='./downloads'
 SCROLL_LENGTH = 10
 OPTIONS = Selenium::WebDriver::Chrome::Options.new(
   args: ['--headless', '--disable-gpu', 'window-size=1280x800', 'user-data-dir='+DATADIR]
@@ -46,8 +46,10 @@ end
 
 begin
 
-  Selenium::WebDriver::Chrome::Service.driver_path = './chromedriver.exe'
+  Selenium::WebDriver::Chrome::Service.driver_path = '/usr/local/bin/chromedriver'
   driver = Selenium::WebDriver.for :chrome, options: OPTIONS
+  
+  
   driver.navigate.to('https://reddit.com/r/'+SUBREDDIT)
 
   counter = 1
@@ -64,7 +66,7 @@ begin
     end
 
 
-    counter = counter + 1
+    counter+=1
   end
 
   myElements.uniq!
